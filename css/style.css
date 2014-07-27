@@ -1,0 +1,110 @@
+/* General Styles - not component critical */
+
+html, body {
+  margin:0;
+}
+
+body {
+  font-family:Arial,"Liberation Sans",sans-serif;
+}
+
+h1, p {
+  margin:25px;
+  color:#3d3d3d;
+  margin-bottom:10px;
+}
+
+p {
+  color:#7d7d7d;
+  padding-right:100px;
+  float:left;
+  margin:0 25px 25px 25px;
+  font-size:10pt;
+}
+
+#linkage {
+  position:fixed;
+  top:70px;
+  right:0px;
+  background-color:#2d2d3d;
+  color:#ffffff;
+  text-decoration:none;
+  padding:10px;
+  width:100px;
+  z-index:2;
+}
+
+#listView {
+  width:100%;
+  min-width:150px;
+  clear:both;
+}
+
+.container {
+  margin:25px;
+}
+
+
+/* 
+ * Component Critical Styles - you must include these!
+ * Dont change unless you know what you are doing.
+ */
+
+.contentPlacerContainer .content {
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:block;
+  position:relative;
+}
+
+.contentPlacerContainer .bar {
+  position:absolute;
+  bottom:0;
+  height:50px;
+  background-color:rgba(30,30,30, 0.8);
+  width:100%;
+  color:#ffffff;
+}
+
+.contentPlacerContainer h2 {
+  margin:6px 15px 0 10px;
+  font-size:10pt;
+}
+
+.contentPlacerContainer p {
+  color:#dfdfdf;
+  margin:5px 15px 0 10px;
+  font-size:10pt;
+  float:none;
+  padding:0;
+}
+
+.contentPlacerContainer {
+  position:relative;
+  margin:0;
+  padding:0;
+}
+
+.contentPlacerContainer .contentPlacerElement {
+  position:absolute;
+  overflow:hidden;
+  opacity:1; 
+  background-color:transparent;
+}
+
+.contentPlacerElement.hidden {
+  opacity:0;
+  -ms-Transform:scale(0, 0);
+  -webkit-Transform: scale(0, 0);
+  transform: scale(0, 0);
+}
+
+.contentPlacerContainer .transition {
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
