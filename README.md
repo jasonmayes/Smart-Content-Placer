@@ -40,6 +40,6 @@ Talk to me: Via [Google+](https://plus.google.com/110804953626559077511/posts/iP
 
 ## Disclaimer / Terms
 
-Feel free to use in your own projects. I only ask you keep the JavaScript disclaimer with my code (even if code is modified) so others can find the original source should they wish to get updates or support. 
+Feel free to use in your own projects. I only ask you keep any disclaimers with my code (even if code is modified / minified) so others can find the original source should they wish to get updates or support. 
 A link back / social media shout out is always appreciated to help others discover it but not required :-)
 
