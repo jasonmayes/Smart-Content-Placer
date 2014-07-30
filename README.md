@@ -38,8 +38,8 @@ All popular browsers supported. Chrome, Firefox, Safari, Opera, Internet Explore
 Really, I like to hear feedback, and love to see what projects you have used it in. Feel free to give me a shoutout if you have used it.
 Talk to me: Via [Google+](https://plus.google.com/110804953626559077511/posts/iPbbwX7ivqW), [twitter](http://www.twitter.com/jason_mayes), or my [website](http://www.jasonmayes.com/).
 
-## Disclaimer / Terms
+## Terms
 
-Feel free to use in your own projects. I only ask you keep any disclaimers with my code (even if code is modified / minified) so others can find the original source should they wish to get updates or support. 
-A link back / social media shout out is always appreciated to help others discover it but not required :-)
+Feel free to use in your own personal projects. I only ask you keep any disclaimers with my code (even if code is modified / minified) so others can find the original source should they wish to get updates or support. A link back / social media shout out is always appreciated to help others discover it (and for me to see what great things it is being used for!) but not required :-)
 
+If you plan to use in a commercial project please contact me first if you are unable to adhere to the above terms.
