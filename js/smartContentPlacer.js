@@ -218,7 +218,7 @@ ContentPlacer.prototype.render = function() {
   var unitSize = this.unitSize;
 
   if (!this.initiated) {
-    var content = '';
+    var frag = document.createDocumentFragment();
 
     function itterativeRender() {
       if (this.renderDelay !== undefined) {
@@ -238,23 +238,32 @@ ContentPlacer.prototype.render = function() {
     while (n < data.length) {
       var pos = this.generatePosition_(dataMatrix, data[n].width,
           data[n].height);
-      content += '<div id="elem' + n + '" class="contentPlacerElement';
+
+      var div = document.createElement('div');
+      div.className = 'contentPlacerElement';
       if (this.renderDelay !== undefined) {
-        content += ' hidden transition';
+        div.className += ' hidden transition';
       }
-      content += '" style="width:' + ((data[n].width * unitSize) +
-          ((data[n].width - 1) * this.margin)) + 'px; height:' +
-          ((data[n].height * unitSize) + ((data[n].height - 1) * this.margin)) +
-          'px; top:' + pos.top + 'px; left:' + pos.left + 'px;">' +
-          data[n].content + '</div>';
+      div.style.width = ((data[n].width * unitSize) + ((data[n].width - 1) *
+          this.margin)) + 'px';
+      div.style.height = ((data[n].height * unitSize) + ((data[n].height - 1) *
+          this.margin)) + 'px';
+      div.style.top = pos.top + 'px';
+      div.style.left = pos.left + 'px';
+      div.innerHTML = data[n].content;
+      frag.appendChild(div);
       n++;
     }
-    content += '</div>';
-    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) *
-        this.margin));
-    content = '<div class="contentPlacerContainer" style="height:' + rHeight +
-        'px">' + content;
-    this.target.innerHTML = content;
+
+    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) * this.margin));
+
+    var container = document.createElement('div');
+    container.className = 'contentPlacerContainer';
+    container.style.height = rHeight + 'px';
+    container.appendChild(frag);
+
+    this.target.appendChild(container);
+    
     this.target.style.height = rHeight + 'px';
     this.target.style.minWidth = ((unitSize + this.margin) *
         this.largestElement) + 'px';
@@ -278,8 +287,7 @@ ContentPlacer.prototype.render = function() {
     }
 
     // Update height of containers.
-    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) *
-        this.margin));
+    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) * this.margin));
     this.target.style.height = rHeight + 'px';
     this.target.children.item(0).style.height = rHeight + 'px';
   }
