@@ -1,5 +1,5 @@
 /**
- * ContentPlacer v8.0 - A small class which allows you to arrange data of 
+ * ContentPlacer v9.0 - A small class which allows you to arrange data of
  * different widths / heights such that white space is minimized.
  * Coded by Jason Mayes 2014. A present to all the developers out there.
  * www.jasonmayes.com
@@ -38,14 +38,8 @@ var ContentPlacer = function(target, unitSize, margin, dataArray, renderDelay) {
 
   // Figure out the minimum number of cols by respecting the width of
   // largest element.
-  var i = this.data.length;
-  while (i--) {
-    if (this.data[i].width > this.largestElement) {
-      this.largestElement = this.data[i].width;
-    }
-  }
-  this.columns = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
-      this.margin)), this.largestElement);
+  this.findLargestNode_();
+  this.calculateColumns_();
 
   var handler = function() {
     var newCols = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
@@ -53,13 +47,35 @@ var ContentPlacer = function(target, unitSize, margin, dataArray, renderDelay) {
     if (newCols != this.columns) {
       this.rowsTot = 1;
       this.columns = newCols;
-      this.render();
+      this.render_();
     }
   }
   var boundHandler = handler.bind(this);
   this.addEventHandler_(window, 'resize', boundHandler);
-  this.render();
+  this.render_();
 };
+
+
+/**
+ * @private
+ */
+ContentPlacer.prototype.calculateColumns_ = function() {
+  this.columns = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
+      this.margin)), this.largestElement);
+}
+
+
+/**
+ * @private
+ */
+ContentPlacer.prototype.findLargestNode_ = function() {
+  var i = this.data.length;
+  while (i--) {
+    if (this.data[i].width > this.largestElement) {
+      this.largestElement = this.data[i].width;
+    }
+  }
+}
 
 
 /**
@@ -212,7 +228,10 @@ ContentPlacer.prototype.generatePosition_ = function(dataMatrix, unitWidth,
 };
 
 
-ContentPlacer.prototype.render = function() {
+/**
+ * @private
+ */
+ContentPlacer.prototype.render_ = function() {
   var data = this.data;
   var dataMatrix = this.matrix_(this.rowsTot, this.columns, 0);
   var unitSize = this.unitSize;
@@ -255,7 +274,8 @@ ContentPlacer.prototype.render = function() {
       n++;
     }
 
-    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) * this.margin));
+    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) *
+        this.margin));
 
     var container = document.createElement('div');
     container.className = 'contentPlacerContainer';
@@ -263,7 +283,7 @@ ContentPlacer.prototype.render = function() {
     container.appendChild(frag);
 
     this.target.appendChild(container);
-    
+
     this.target.style.height = rHeight + 'px';
     this.target.style.minWidth = ((unitSize + this.margin) *
         this.largestElement) + 'px';
@@ -283,12 +303,62 @@ ContentPlacer.prototype.render = function() {
           data[n].height);
       this.elemCache[n].style.top = pos.top + 'px';
       this.elemCache[n].style.left = pos.left + 'px';
+      this.elemCache[n].style.width = ((data[n].width * unitSize) +
+          ((data[n].width - 1) * this.margin)) + 'px';
+      this.elemCache[n].style.height = ((data[n].height * unitSize) +
+          ((data[n].height - 1) * this.margin)) + 'px';
       n++;
     }
 
     // Update height of containers.
-    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) * this.margin));
+    var rHeight = ((this.rowsTot * unitSize) + ((this.rowsTot - 1) *
+        this.margin));
     this.target.style.height = rHeight + 'px';
     this.target.children.item(0).style.height = rHeight + 'px';
   }
+};
+
+// Public functions to programatically change things after initial instance has
+// been created.
+
+/**
+ * Set a new margin size.
+ */
+ContentPlacer.prototype.setMargin = function(marginSizePx) {
+  this.margin = marginSizePx;
+  this.columns = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
+      this.margin)), this.largestElement);
+  this.render_();
+};
+
+
+/**
+ * Set a new default unit size.
+ */
+ContentPlacer.prototype.setUnitSize = function(size) {
+  this.unitSize = size;
+  this.columns = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
+      this.margin)), this.largestElement);
+  this.render_();
+};
+
+
+/**
+ * Set a new default unit size.
+ */
+ContentPlacer.prototype.setData = function(dataArr) {
+  this.dataArray = dataArr;
+  this.findLargestNode_();
+  this.calculateColumns_();
+  this.target.innerHTML = '';
+  this.initiated = false;
+  this.render_();
+};
+
+
+/**
+ * Set a new transition delay.
+ */
+ContentPlacer.prototype.setDelay = function(delayMs) {
+  this.renderDelay = delayMs;
 };

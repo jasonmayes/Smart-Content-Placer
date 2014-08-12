@@ -22,6 +22,10 @@ p {
   font-size:10pt;
 }
 
+#intro1, #intro2, #intro3 {
+  font-size:12pt;
+}
+
 #linkage {
   position:fixed;
   top:70px;
@@ -42,6 +46,10 @@ p {
 
 .container {
   margin:25px;
+}
+
+.hide {
+  display:none;
 }
 
 

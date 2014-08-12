@@ -49,4 +49,24 @@ dataArrayExample.push(new ContentPlacerData('<a href="http://www.jasonmayes.com/
 dataArrayExample.push(new ContentPlacerData('<a href="http://www.jasonmayes.com/" class="content" style="background-image:url(\'http://placekitten.com/200/200\');"><div class="bar"><h2>Its a kitten!</h2><p>Meow nom nom</p></div></a>', 1 ,1));
 dataArrayExample.push(new ContentPlacerData('<a href="http://www.jasonmayes.com/" class="content" style="background-image:url(\'http://placekitten.com/200/200\');"><div class="bar"><h2>Its a kitten!</h2><p>Meow nom nom</p></div></a>', 1 ,1));
 dataArrayExample.push(new ContentPlacerData('<a href="http://www.jasonmayes.com/" class="content" style="background-image:url(\'http://placekitten.com/200/200\');"><div class="bar"><h2>Its a kitten!</h2><p>Meow nom nom</p></div></a>', 1 ,1));
-var myPlacer = new ContentPlacer('listView', 200, 4, dataArrayExample, 30);
+
+// Create new instance and use the above data.
+var myPlacer = new ContentPlacer('listView', 250, 4, dataArrayExample, 30);
+
+// After 5 seconds, change margin and size of units and see it update live!
+setTimeout(function() {
+  document.getElementById('intro1').className = 'hide';
+  document.getElementById('intro2').className = '';
+  myPlacer.setMargin(1);
+  myPlacer.setUnitSize(200);
+}, 5000);
+
+// After 10 seconds, change the transition delay when rendering new content and
+// then add some new content! (Imagine you queried some API and wanted to render
+// new data it had returned...).
+setTimeout(function() {
+  document.getElementById('intro2').className = 'hide';
+  document.getElementById('intro3').className = '';
+  myPlacer.setDelay(300);
+  myPlacer.setData(dataArrayExample);
+}, 10000);
