@@ -11,7 +11,8 @@
  * Or see Github:
  * https://github.com/jasonmayes/Smart-Content-Placer
  * @constructor
- * @param {String} target The DOM element ID we wish to render content in to.
+ * @param {String|HTMLElement} target The DOM element ID/HTMLElement we wish to
+ *     render content in to.
  * @param {Number} unitWidthHeight The width and height of the smallest element
  *     (a square). All
  *     other elements are whole number multiple of this number. For example if
@@ -23,7 +24,8 @@
  * @param {Number} renderDelay Optional fade in delay for each item in ms.
  */
 var ContentPlacer = function(target, unitSize, margin, dataArray, renderDelay) {
-  this.target = document.getElementById(target);
+  typeof target === 'string' ?
+      this.target = document.getElementById(target) : this.target = target;
   this.unitSize = unitSize;
   this.margin = margin;
   this.data = dataArray;
