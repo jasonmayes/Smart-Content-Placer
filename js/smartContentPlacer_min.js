@@ -11,7 +11,8 @@
  * Or see Github:
  * https://github.com/jasonmayes/Smart-Content-Placer
  * @constructor
- * @param {String} target The DOM element ID we wish to render content in to.
+ * @param {String|HTMLElement} target The DOM element ID/HTMLElement we wish to
+ *     render content in to.
  * @param {Number} unitWidthHeight The width and height of the smallest element
  *     (a square). All
  *     other elements are whole number multiple of this number. For example if
@@ -22,8 +23,8 @@
  *     <ContentPlacerData> containing content we wish to render.
  * @param {Number} renderDelay Optional fade in delay for each item in ms.
  */
-var ContentPlacer=function(a,c,d,f,g){this.target=document.getElementById(a);this.unitSize=c;this.margin=d;this.data=f;this.rowsTot=1;this.initiated=!1;this.largestElement=1;this.renderDelay=g;this.itteration=0;this.elemCache=[];this.findLargestNode_();this.calculateColumns_();a=function(){var a=Math.max(Math.floor(this.target.offsetWidth/(this.unitSize+this.margin)),this.largestElement);a!=this.columns&&(this.rowsTot=1,this.columns=a,this.render_())}.bind(this);this.addEventHandler_(window,"resize",
-a);this.render_()};ContentPlacer.prototype.calculateColumns_=function(){this.columns=Math.max(Math.floor(this.target.offsetWidth/(this.unitSize+this.margin)),this.largestElement)};ContentPlacer.prototype.findLargestNode_=function(){for(var a=this.data.length;a--;)this.data[a].width>this.largestElement&&(this.largestElement=this.data[a].width)};ContentPlacer.prototype.matrix_=function(a,c,d){for(var f=[],g=0;g<a;g++){for(var b=[],e=0;e<c;e++)b.push(d);f.push(b)}return f};
+var ContentPlacer=function(a,c,d,f,g){"string"===typeof a?this.target=document.getElementById(a):this.target=a;this.unitSize=c;this.margin=d;this.data=f;this.rowsTot=1;this.initiated=!1;this.largestElement=1;this.renderDelay=g;this.itteration=0;this.elemCache=[];this.findLargestNode_();this.calculateColumns_();a=function(){var a=Math.max(Math.floor(this.target.offsetWidth/(this.unitSize+this.margin)),this.largestElement);a!=this.columns&&(this.rowsTot=1,this.columns=a,this.render_())}.bind(this);
+this.addEventHandler_(window,"resize",a);this.render_()};ContentPlacer.prototype.calculateColumns_=function(){this.columns=Math.max(Math.floor(this.target.offsetWidth/(this.unitSize+this.margin)),this.largestElement)};ContentPlacer.prototype.findLargestNode_=function(){for(var a=this.data.length;a--;)this.data[a].width>this.largestElement&&(this.largestElement=this.data[a].width)};ContentPlacer.prototype.matrix_=function(a,c,d){for(var f=[],g=0;g<a;g++){for(var b=[],e=0;e<c;e++)b.push(d);f.push(b)}return f};
 ContentPlacer.prototype.growMatrix_=function(a,c,d){for(var f=0;f<c;f++){for(var g=[],b=0;b<this.columns;b++)g.push(d);a.push(g)}return a};ContentPlacer.prototype.addEventHandler_=function(a,c,d){a.addEventListener?a.addEventListener(c,d,!1):a.attachEvent&&a.attachEvent("on"+c,d)};
 ContentPlacer.prototype.generatePosition_=function(a,c,d){var f=0,g=0,b,e=0,h=a[0].length,p=a.length,n=!1;c>this.largestElement&&(this.largestElement=c);for(;e<p;){for(b=0;b<h;){if(0===a[e][b]){var m=!0;b+c-1>=h&&(m=!1);e+d-1>=p&&(m=!1);if(m)for(var k=0;k<c;){for(var l=0;l<d;){if(0!==a[e+l][b+k]){m=!1;break}l++}if(!m)break;k++}if(m){n=!0;g=b*(this.unitSize+this.margin);f=e*(this.unitSize+this.margin);e+d>this.rowsTot&&(this.rowsTot=e+d);for(k=0;k<c;){for(l=0;l<d;)a[e+l][b+k]=1,l++;k++}break}}b++}if(n)break;
 e++}if(n)return{top:f,left:g};this.growMatrix_(a,Math.ceil(a.length/2),0);return this.generatePosition_(a,c,d)};
