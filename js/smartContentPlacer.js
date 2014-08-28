@@ -364,7 +364,7 @@ ContentPlacer.prototype.setData = function(dataArr) {
  * @param {Array.<Object>} dataArray An array containing data we wish to add.
  */
 ContentPlacer.prototype.addData = function(dataArr) {
-  this.dataArray.concat(dataArr);
+  this.dataArray = this.dataArray.concat(dataArr);
   this.findLargestNode_();
   this.calculateColumns_();
   this.target.innerHTML = '';
