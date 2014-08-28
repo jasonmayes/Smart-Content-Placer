@@ -44,12 +44,14 @@ var ContentPlacer = function(target, unitSize, margin, dataArray, renderDelay) {
   this.calculateColumns_();
 
   var handler = function() {
-    var newCols = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
-        this.margin)), this.largestElement);
-    if (newCols != this.columns) {
-      this.rowsTot = 1;
-      this.columns = newCols;
-      this.render_();
+    if (this.data.length > 0) {
+      var newCols = Math.max(Math.floor(this.target.offsetWidth / (this.unitSize +
+          this.margin)), this.largestElement);
+      if (newCols != this.columns) {
+        this.rowsTot = 1;
+        this.columns = newCols;
+        this.render_();
+      }
     }
   }
   var boundHandler = handler.bind(this);
