@@ -1,4 +1,7 @@
-/* General Styles - not component critical */
+/* 
+ * General Styles - not component critical but used to achieve demo
+ * look and feel.
+ */
 
 html, body {
   margin:0;
@@ -52,22 +55,6 @@ p {
   display:none;
 }
 
-
-/* 
- * Component Critical Styles - you must include these!
- * Dont change unless you know what you are doing.
- */
-
-.contentPlacerContainer .content {
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background-repeat:no-repeat;
-  background-size:cover;
-  display:block;
-  position:relative;
-}
-
 .contentPlacerContainer .bar {
   position:absolute;
   bottom:0;
@@ -89,6 +76,22 @@ p {
   float:none;
   padding:0;
 }
+
+.contentPlacerContainer .content {
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:block;
+  position:relative;
+}
+
+
+/* 
+ * Component Critical Styles - you must include these!
+ * Dont change unless you know what you are doing.
+ */
 
 .contentPlacerContainer {
   position:relative;
