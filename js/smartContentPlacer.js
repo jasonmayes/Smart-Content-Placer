@@ -346,10 +346,25 @@ ContentPlacer.prototype.setUnitSize = function(size) {
 
 
 /**
- * Set a new default unit size.
+ * Set new data to use, overwrites existing.
+ * @param {Array.<Object>} dataArray An array containing data we wish to use.
  */
 ContentPlacer.prototype.setData = function(dataArr) {
   this.dataArray = dataArr;
+  this.findLargestNode_();
+  this.calculateColumns_();
+  this.target.innerHTML = '';
+  this.initiated = false;
+  this.render_();
+};
+
+
+/**
+ * Add new data to use, appends to existing.
+ * @param {Array.<Object>} dataArray An array containing data we wish to add.
+ */
+ContentPlacer.prototype.addData = function(dataArr) {
+  this.dataArray.concat(dataArr);
   this.findLargestNode_();
   this.calculateColumns_();
   this.target.innerHTML = '';
