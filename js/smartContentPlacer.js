@@ -1,5 +1,5 @@
 /**
- * ContentPlacer v9.0 - A small class which allows you to arrange data of
+ * ContentPlacer v10.0 - A small class which allows you to arrange data of
  * different widths / heights such that white space is minimized.
  * Coded by Jason Mayes 2014. A present to all the developers out there.
  * www.jasonmayes.com
